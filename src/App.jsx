@@ -9,13 +9,7 @@ function Square({ value, onSquareClick }) {
   )
 }
 
-function PlayersName({
-  playerXName,
-  setPlayerXName,
-  playerOName,
-  setPlayerOName,
-}) {
-
+function PlayersName({playerXName, setPlayerXName, playerOName, setPlayerOName}) {
   return (
     <div>
       <div>
