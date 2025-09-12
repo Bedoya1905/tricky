@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { use, useState } from 'react'
 import './App.css'
 
 function Square({ value, onSquareClick }) {
@@ -9,7 +9,30 @@ function Square({ value, onSquareClick }) {
   )
 }
 
+function PlayersName({
+  playerXName,
+  setPlayerXName,
+  playerOName,
+  setPlayerOName,
+}) {
+
+  return (
+    <div>
+      <div>
+        <label for="name-x">Player X name: </label>
+        <input id="name-x" type="text" value={playerXName} onChange={(e) => setPlayerXName(e.target.value)}></input>
+      </div>
+      <div>
+        <label for="name-o">Player O name: </label>
+        <input id="name-o" type="text" value={playerOName} onChange={(e) => setPlayerOName(e.target.value)}></input>
+      </div>
+    </div>
+  )
+}
+
 function Board({ xIsNext, squares, onPlay }) {
+  const [playerXName, setPlayerXName] = useState("");
+  const [playerOName, setPlayerOName] = useState(""); 
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
@@ -30,11 +53,19 @@ function Board({ xIsNext, squares, onPlay }) {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Next player: " + (xIsNext ? (playerXName !== "" ? playerXName : "X" ) : (playerOName !== "" ? playerOName : "O" ));
   }
 
   return (
     <div className='board'>
+      <div className='game-names'>
+        <PlayersName 
+        playerXName={playerXName}
+        setPlayerXName={setPlayerXName}
+        playerOName={playerOName}
+        setPlayerOName={setPlayerOName}
+        />
+      </div>
       <div className='status'>{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
