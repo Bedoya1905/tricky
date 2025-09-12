@@ -1,4 +1,4 @@
-import { use, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 
 function Square({ value, onSquareClick }) {
@@ -9,30 +9,7 @@ function Square({ value, onSquareClick }) {
   )
 }
 
-function PlayersName({
-  playerXName,
-  setPlayerXName,
-  playerOName,
-  setPlayerOName,
-}) {
-
-  return (
-    <div>
-      <div>
-        <label for="name-x">Player X name: </label>
-        <input id="name-x" type="text" value={playerXName} onChange={(e) => setPlayerXName(e.target.value)}></input>
-      </div>
-      <div>
-        <label for="name-o">Player O name: </label>
-        <input id="name-o" type="text" value={playerOName} onChange={(e) => setPlayerOName(e.target.value)}></input>
-      </div>
-    </div>
-  )
-}
-
 function Board({ xIsNext, squares, onPlay }) {
-  const [playerXName, setPlayerXName] = useState("");
-  const [playerOName, setPlayerOName] = useState(""); 
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
@@ -53,19 +30,11 @@ function Board({ xIsNext, squares, onPlay }) {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? (playerXName !== "" ? playerXName : "X" ) : (playerOName !== "" ? playerOName : "O" ));
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   return (
     <div className='board'>
-      <div className='game-names'>
-        <PlayersName 
-        playerXName={playerXName}
-        setPlayerXName={setPlayerXName}
-        playerOName={playerOName}
-        setPlayerOName={setPlayerOName}
-        />
-      </div>
       <div className='status'>{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
@@ -111,6 +80,12 @@ export default function Game() {
     setCurrentMove(nextHistory.length - 1);
   }
 
+  function restart(){
+    jumpTo(0);
+    const nextHistory = [...history.slice(0, 1)];
+    setHistory(nextHistory);
+  }
+
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
   }
@@ -131,6 +106,9 @@ export default function Game() {
 
   return (
     <div className="game">
+      <div className="game-restart">
+        <button onClick={() => restart()} className='restart-button'>Restart</button>
+      </div>
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
       </div>
