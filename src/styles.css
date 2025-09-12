@@ -66,12 +66,52 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }*/
+body, html{
+  background-color: rgb(12, 11, 10);
+  color: rgb(255, 255, 255);
+}
+
 button {
   height: 50px;
   width: 50px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(12, 11, 10);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 2px;
 }
-.board-row {
-  display: flex;
-  align-items: center;
-  justify-self: center;
+
+div{
+
+  &.game, &.root {
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.board-row {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+  }
+
+  &.status {text-align: center; margin-bottom: 10px;}
+
+  &.game {
+    display: flex;
+    gap: 20px;
+  }
+
+  &.game-info {
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: rgb(255, 255, 255) rgb(12, 11, 10);
+    scrollbar-width: thin;
+    border-left: 2px solid rgb(255, 255, 255);
+    padding-right: 8px;
+  }
+
+  &.board-row, &.board {gap: 2px;}
+
 }
