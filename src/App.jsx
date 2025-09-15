@@ -105,6 +105,12 @@ export default function Game() {
     setCurrentMove(nextHistory.length - 1);
   }
 
+  function restart(){
+    jumpTo(0);
+    const nextHistory = [...history.slice(0, 1)];
+    setHistory(nextHistory);
+  }
+
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
   }
@@ -125,6 +131,9 @@ export default function Game() {
 
   return (
     <div className="game">
+      <div className="game-restart">
+        <button onClick={() => restart()} className='restart-button'>Restart</button>
+      </div>
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
       </div>
