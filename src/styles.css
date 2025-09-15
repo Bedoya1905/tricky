@@ -71,6 +71,21 @@ body, html{
   color: rgb(255, 255, 255);
 }
 
+input {
+  background-color: rgb(12, 11, 10);
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 2px;
+  transition: 0.5s all ease-in;
+}
+input:focus, input:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(12, 11, 10);
+  border: 2px solid rgb(12, 11, 10);
+  padding: 2px;
+}
+
+
 button {
   height: 70px;
   width: 70px;
